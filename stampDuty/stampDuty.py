@@ -10,7 +10,7 @@ def main():
 		except ValueError:
 			print("Input must be a number")
 	tax = firstTimeBuyer(price)
-	if tax = -1:
+	if tax == -1:
 		print('Price must be positive')
 	else:
 		print(f'This will cost £{tax} in stamp duty')
