@@ -16,28 +16,32 @@ def main():
 		print(f'This will cost £{tax} in stamp duty')
 
 def firstTimeBuyer(price):
+	band0Rate = 0
 	band1Rate = 0.05
 	band2Rate = 0.1
 	band3Rate = 0.12
 	band0Price = 250000
 	band1Price = 925000
 	band2Price = 1500000
-	if (price <= band0Price):
-		return 0
-	elif (price <= band1Price):
-		tax = band1Rate * (price - 250000)
-		return tax
-	elif (price <= band2Price):
-		band1 = price - 925000
-		band2 = 675000
-		tax = (0.1 * band1) + (0.05 * band2)
-		return tax
-	else:
-		band1 = price - 1500000
-		band2 = 575000
-		band3 = 675000
-		tax = (0.12 * band1) + (0.1 * band2) + (0.05 * band3)
-		return tax
+	tax = 0
+	while (price > 0):
+		if (price <= band0Price):
+			taxAdded = price * band0Rate
+			tax += taxAdded
+			price = 0
+		elif (price <= band1Price):
+			taxAdded = band1Rate * (price - band0Price)
+			tax += taxAdded
+			price = band0Price
+		elif (price <= band2Price):
+			taxAdded = band2Rate * (price - band1Price)
+			tax += taxAdded
+			price = band1Price
+		else:
+			taxAdded = band3Rate * (price - band2Price)
+			tax += taxAdded
+			price = band2Price
+	return tax
 
 if __name__ == "__main__":
     main()
